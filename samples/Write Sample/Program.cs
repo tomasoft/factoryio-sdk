@@ -17,9 +17,9 @@ namespace EngineIO.Samples
         {
             //We are using a MemoryBit which we get from the MemoryMap.
             //You can find the memory addresses of a specific Factory I/O Tag by toggling the visibility of the Tags Address in the View Menu, or by docking the Tag.
-            MemoryBit rollerConveyor = MemoryMap.Instance.GetBit(0, MemoryType.Output);
+            var rollerConveyor = MemoryMap.Instance.GetBit(0, MemoryType.Output);
 
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 rollerConveyor.Value = !rollerConveyor.Value;
 

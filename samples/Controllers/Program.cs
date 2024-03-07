@@ -27,13 +27,13 @@ namespace Controllers
         static void Main(string[] args)
         {
             //Stopwatch used to measure elapsed time between cycles
-            Stopwatch stopwatch = new Stopwatch();
+            var stopwatch = new Stopwatch();
 
             //MemoryBit used to switch FACTORY I/O between edit and run mode
-            MemoryBit start = MemoryMap.Instance.GetBit(MemoryMap.BitCount - 16, MemoryType.Output);
+            var start = MemoryMap.Instance.GetBit(MemoryMap.BitCount - 16, MemoryType.Output);
 
             //MemoryBit used to detect if FACTORY I/O is edit or run mode
-            MemoryBit running = MemoryMap.Instance.GetBit(MemoryMap.BitCount - 16, MemoryType.Input);
+            var running = MemoryMap.Instance.GetBit(MemoryMap.BitCount - 16, MemoryType.Input);
 
             //Forcing a rising edge on the start MemoryBit so FACTORY I/O can detect it
             SwitchToRun(start);
@@ -61,7 +61,7 @@ namespace Controllers
             //Controller controller = new SortingWeight();
             //Controller controller = new SortingStation();
 
-            Console.WriteLine(string.Format("Running controller: {0}", controller.GetType().Name));
+            Console.WriteLine($"Running controller: {controller.GetType().Name}");
             Console.WriteLine("Press Escape to shutdown...");
 
             stopwatch.Start();

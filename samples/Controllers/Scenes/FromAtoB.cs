@@ -10,18 +10,18 @@ namespace Controllers
 {
     public class FromAToB : Controller
     {
-        MemoryBit conveyor = MemoryMap.Instance.GetBit("Conveyor", MemoryType.Output);
+        MemoryBit _conveyor = MemoryMap.Instance.GetBit("Conveyor", MemoryType.Output);
 
-        MemoryBit sensor = MemoryMap.Instance.GetBit("Sensor", MemoryType.Input);
+        MemoryBit _sensor = MemoryMap.Instance.GetBit("Sensor", MemoryType.Input);
 
         public FromAToB()
         {
-            conveyor.Value = false;
+            _conveyor.Value = false;
         }
 
         public override void Execute(int elapsedMilliseconds)
         {
-            conveyor.Value = sensor.Value;
+            _conveyor.Value = _sensor.Value;
         }
     }
 }

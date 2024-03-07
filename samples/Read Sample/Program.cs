@@ -16,7 +16,7 @@ namespace EngineIO.Samples
         {
             //We are using a MemoryBit which we get from the MemoryMap.
             //You can find the memory addresses of a specific Factory I/O Tag by toggling the visibility of the Tags Address in the View Menu, or by docking the Tag.
-            MemoryBit diffuseSensor = MemoryMap.Instance.GetBit(0, MemoryType.Input);
+            var diffuseSensor = MemoryMap.Instance.GetBit(0, MemoryType.Input);
 
             //We must call the Update method each time we want to access the latest value.
             MemoryMap.Instance.Update();

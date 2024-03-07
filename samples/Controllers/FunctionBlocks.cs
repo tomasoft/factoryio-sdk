@@ -444,13 +444,13 @@ namespace Controllers
             PV = pv;
 
             //Convert milliseconds to seconds
-            double dt = elapsedMilliseconds * 0.001; 
+            var dt = elapsedMilliseconds * 0.001; 
 
             //Calculate errors
-            double error = SP - PV;
+            var error = SP - PV;
 
             //Remove derivative kick by using just the input to calculate the error, pay attention to the signals!
-            double dError = (dt == 0.0) ? 0.0 : (prvPV - PV) / dt;
+            var dError = (dt == 0.0) ? 0.0 : (prvPV - PV) / dt;
 
             prvPV = PV;
 

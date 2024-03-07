@@ -9,17 +9,19 @@ using System.Threading;
 
 namespace EngineIO.Samples
 {
-    class Program
+    using System.Globalization;
+
+    internal static class Program
     {
         //In this sample we are showing how to use the InputsNameChanged, InputsValueChange, OutputsNameChanged and OutputsValueChange events.
         //Add, change and remove Tags in Factory I/O to get notified about its memories changes (no Saved Scene needed).
-        static void Main(string[] args)
+        static void Main()
         {
             //Registering on the events
-            MemoryMap.Instance.InputsNameChanged += new MemoriesChangedEventHandler(Instance_NameChanged);
-            MemoryMap.Instance.InputsValueChanged += new MemoriesChangedEventHandler(Instance_ValueChanged);
-            MemoryMap.Instance.OutputsNameChanged += new MemoriesChangedEventHandler(Instance_NameChanged);
-            MemoryMap.Instance.OutputsValueChanged += new MemoriesChangedEventHandler(Instance_ValueChanged);
+            MemoryMap.Instance.InputsNameChanged += Instance_NameChanged;
+            MemoryMap.Instance.InputsValueChanged += Instance_ValueChanged;
+            MemoryMap.Instance.OutputsNameChanged += Instance_NameChanged;
+            MemoryMap.Instance.OutputsValueChanged += Instance_ValueChanged;
 
             Console.WriteLine("Press any key to exit...");
 
@@ -40,51 +42,51 @@ namespace EngineIO.Samples
         static void Instance_NameChanged(MemoryMap sender, MemoriesChangedEventArgs value)
         {
             //Display any changed MemoryBit
-            foreach (MemoryBit mem in value.MemoriesBit)
+            foreach (var mem in value.MemoriesBit)
             {
-                if (mem.HasName)
-                    Console.WriteLine(string.Format("{0} Bit({1}) name changed to: {2}", mem.MemoryType.ToString(), mem.Address, mem.Name));
-                else
-                    Console.WriteLine(string.Format("{0} Bit({1}) name cleared", mem.MemoryType.ToString(), mem.Address));
+                Console.WriteLine(mem.HasName
+                    ? $"{mem.MemoryType.ToString()} Bit({mem.Address}) name changed to: {mem.Name}"
+                    : $"{mem.MemoryType.ToString()} Bit({mem.Address}) name cleared");
             }
 
             //Display any changed MemoryFloat
-            foreach (MemoryFloat mem in value.MemoriesFloat)
+            foreach (var mem in value.MemoriesFloat)
             {
-                if (mem.HasName)
-                    Console.WriteLine(string.Format("{0} Float({1}) name changed to: {2}", mem.MemoryType.ToString(), mem.Address, mem.Name));
-                else
-                    Console.WriteLine(string.Format("{0} Float({1}) name cleared", mem.MemoryType.ToString(), mem.Address));
+                Console.WriteLine(mem.HasName
+                    ? $"{mem.MemoryType.ToString()} Float({mem.Address}) name changed to: {mem.Name}"
+                    : $"{mem.MemoryType.ToString()} Float({mem.Address}) name cleared");
             }
 
             //Display any changed MemoryInt
-            foreach (MemoryInt mem in value.MemoriesInt)
+            foreach (var mem in value.MemoriesInt)
             {
-                if (mem.HasName)
-                    Console.WriteLine(string.Format("{0} Int({1}) name changed to: {2}", mem.MemoryType.ToString(), mem.Address, mem.Name));
-                else
-                    Console.WriteLine(string.Format("{0} Int({1}) name cleared", mem.MemoryType.ToString(), mem.Address));
+                Console.WriteLine(mem.HasName
+                    ? $"{mem.MemoryType.ToString()} Int({mem.Address}) name changed to: {mem.Name}"
+                    : $"{mem.MemoryType.ToString()} Int({mem.Address}) name cleared");
             }
         }
 
         static void Instance_ValueChanged(MemoryMap sender, MemoriesChangedEventArgs value)
         {
             //Display any changed MemoryBit
-            foreach (MemoryBit mem in value.MemoriesBit)
+            foreach (var mem in value.MemoriesBit)
             {
-                Console.WriteLine(string.Format("{0} Bit{1} value changed to: {2}", mem.MemoryType.ToString(), mem.Address, mem.Value.ToString()));
+                Console.WriteLine(
+                    $"{mem.MemoryType.ToString()} Bit{mem.Address} value changed to: {mem.Value.ToString()}");
             }
 
             //Display any changed MemoryFLoat
-            foreach (MemoryFloat mem in value.MemoriesFloat)
+            foreach (var mem in value.MemoriesFloat)
             {
-                Console.WriteLine(string.Format("{0} Float{1} value changed to: {2}", mem.MemoryType.ToString(), mem.Address, mem.Value.ToString()));
+                Console.WriteLine(
+                    $"{mem.MemoryType.ToString()} Float{mem.Address} value changed to: {mem.Value.ToString(CultureInfo.CurrentCulture)}");
             }
 
             //Display any changed MemoryInt
-            foreach (MemoryInt mem in value.MemoriesInt)
+            foreach (var mem in value.MemoriesInt)
             {
-                Console.WriteLine(string.Format("{0} Int{1} value changed to: {2}", mem.MemoryType.ToString(), mem.Address, mem.Value.ToString()));
+                Console.WriteLine(
+                    $"{mem.MemoryType.ToString()} Int{mem.Address} value changed to: {mem.Value.ToString()}");
             }
         }
     }

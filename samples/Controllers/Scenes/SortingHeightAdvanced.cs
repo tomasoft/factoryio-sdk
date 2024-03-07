@@ -125,7 +125,7 @@ namespace Controllers
                 {
                     if (partsFIFO.Count > 0)
                     {
-                        bool isHigh = partsFIFO.Dequeue();
+                        var isHigh = partsFIFO.Dequeue();
 
                         if (isHigh)
                         {
